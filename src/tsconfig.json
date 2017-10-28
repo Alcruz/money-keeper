@@ -5,18 +5,14 @@
         "noImplicitAny": true,
         "moduleResolution": "node",
         "sourceMap": true,
-        "baseUrl": ".",
+        "baseUrl": "../",
         "paths": {
             "*": [
-                "node_modules/*",
-                "src/types/*"
+                "../node_modules/*"
             ]
         },
         "typeRoots": [
-            "node_modules/@types/"
+            "../node_modules/@types/"
         ]
-    },
-    "include": [
-        "src/**/*"
-    ]
+    }
 }

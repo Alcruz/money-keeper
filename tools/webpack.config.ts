@@ -8,6 +8,10 @@ const VERBOSE = (process.argv.indexOf("--verbose") !== -1);
 
 const serverConfig: webpack.Configuration = {
   entry: "./src/server.ts",
+  output: {
+    filename: "server.js",
+    path: path.resolve(__dirname, "../build"),
+  },
 
   cache: DEBUG,
 
@@ -34,17 +38,13 @@ const serverConfig: webpack.Configuration = {
       },
       {
         test: /\.ts$/,
-        use: "ts-loader?configFile=../tsconfig.json",
+        use: "ts-loader?configFile=../src/tsconfig.json",
         exclude: /node_modules/,
       },
     ],
   },
   resolve: {
     extensions: [ ".tsx", ".ts", ".js" ],
-  },
-  output: {
-    filename: "server.js",
-    path: path.resolve(__dirname, "../build"),
   },
 };
 
