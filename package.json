@@ -3,18 +3,39 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "npm run build && node build/server.js",
+    "start": "npm run clean && npm run bundle && node build/server.js",
+    "clean": "ts-node --project tools tools/run clean",
+    "bundle": "ts-node --project tools tools/run bundle",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "express": "^4.16.2",
+    "@types/del": "^3.0.0",
+    "@types/extend": "^3.0.0",
+    "@types/mkdirp": "^0.5.1",
+    "@types/webpack": "^3.0.14",
+    "@types/webpack-node-externals": "^1.6.0",
+    "core-js": "^2.5.1",
+    "del": "^3.0.0",
+    "extend": "^3.0.1",
+    "file-loader": "^1.1.5",
+    "json-loader": "^0.5.7",
+    "mkdirp": "^0.5.1",
+    "pug-loader": "^2.3.0",
+    "raw-loader": "^0.5.1",
+    "ts-loader": "^3.1.0",
     "tslint": "^5.8.0",
-    "typescript": "^2.5.3"
+    "typescript": "^2.5.3",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.8.1",
+    "webpack-node-externals": "^1.6.0"
   },
   "dependencies": {
-    "@types/express": "^4.0.39"
+    "@types/node": "^8.0.47",
+    "@types/express": "^4.0.39",
+    "express": "^4.16.2",
+    "pug": "^2.0.0-rc.4"
   }
 }
