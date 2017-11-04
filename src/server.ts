@@ -3,6 +3,9 @@ import * as path from "path";
 
 const app = express();
 
+const staticRoot = path.join(__dirname, "/public/");
+app.use(express.static(staticRoot));
+
 app.get("/", (req, res) => {
     const template = require("./views/index.pug");
     const data = {

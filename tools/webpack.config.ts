@@ -10,6 +10,7 @@ const serverConfig: webpack.Configuration = {
   entry: "./src/server.ts",
   output: {
     filename: "server.js",
+    publicPath: "/",
     path: path.resolve(__dirname, "../build"),
   },
 
@@ -27,6 +28,14 @@ const serverConfig: webpack.Configuration = {
   },
 
   target: "node",
+  node: {
+    console: false,
+    global: false,
+    process: false,
+    Buffer: false,
+    __filename: false,
+    __dirname: false,
+  },
   externals: [nodeExternals()],
 
   module: {
@@ -39,13 +48,57 @@ const serverConfig: webpack.Configuration = {
       {
         test: /\.ts$/,
         use: "ts-loader?configFile=../src/tsconfig.json",
-        exclude: /node_modules/,
+        exclude: [ /node_modules/, /public/ ],
+      },
+    ],
+  },
+  resolve: {
+    extensions: [ "ts", ".js" ],
+  },
+};
+
+const clientConfig: webpack.Configuration = {
+  entry: "./src/public/App.tsx",
+  output: {
+    filename: "client.js",
+    path: path.resolve(__dirname, "../build/public"),
+  },
+
+  cache: DEBUG,
+
+  stats: {
+    colors: true,
+    reasons: DEBUG,
+    hash: VERBOSE,
+    version: VERBOSE,
+    timings: true,
+    chunks: VERBOSE,
+    chunkModules: VERBOSE,
+    cached: VERBOSE,
+  },
+
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: {
+          loader: "ts-loader",
+          options: {
+            configFile: path.resolve(__dirname, "..", "src/public/tsconfig.json"),
+          },
+        },
+        exclude: [ /node_modules/ ],
       },
     ],
   },
   resolve: {
     extensions: [ ".tsx", ".ts", ".js" ],
   },
+
+  // externals: {
+  //   "react": "React",
+  //   "react-dom": "ReactDOM",
+  // },
 };
 
-export default [serverConfig];
+export default [serverConfig, clientConfig];
