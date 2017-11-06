@@ -95,10 +95,10 @@ const clientConfig: webpack.Configuration = {
     extensions: [ ".tsx", ".ts", ".js" ],
   },
 
-  // externals: {
-  //   "react": "React",
-  //   "react-dom": "ReactDOM",
-  // },
+  externals: {
+    "react": "React",
+    "react-dom": "ReactDOM",
+  },
 };
 
 export default [serverConfig, clientConfig];
