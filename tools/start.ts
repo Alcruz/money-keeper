@@ -28,13 +28,12 @@ async function start() {
                             test: /\.tsx?$/,
                             use: [
                                 {
-                                    loader:
-                                    "babel-loader?plugins[]=react-hot-loader/babel&presets[]=es2015&cacheDirectory",
+                                    loader: "react-hot-loader/webpack",
                                 },
                                 {
-                                    loader: "awesome-typescript-loader",
+                                    loader: "ts-loader",
                                     options: {
-                                        configFileName: path.resolve(__dirname, "..", "src/public/tsconfig.json"),
+                                        configFile: path.resolve(__dirname, "..", "src/public/tsconfig.json"),
                                     },
                                 },
                             ],
