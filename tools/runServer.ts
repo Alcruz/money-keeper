@@ -9,17 +9,17 @@
 
 import * as cp from "child_process";
 import * as path from "path";
-import webpackConfig from "./webpack.config";
+import { serverConfig } from "./webpack.config";
 
 // Should match the text string used in `src/server.js/server.listen(...)`
 const RUNNING_REGEXP = /The server is running at http:\/\/(.*?)\//;
 
 let server;
-const { output } = webpackConfig.find((x) => x.target === "node");
+const { output } = serverConfig;
 const serverPath = path.join(output.path, output.filename);
 
 // Launch or restart the Node.js server
-function runServer(cb) {
+function runServer(cb?) {
   function onStdOut(data) {
     const time = new Date().toTimeString();
     const match = data.toString("utf8").match(RUNNING_REGEXP);

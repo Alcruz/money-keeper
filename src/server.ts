@@ -1,6 +1,7 @@
 import * as express from "express";
 import * as path from "path";
 
+const port = 3000;
 const app = express();
 
 const staticRoot = path.join(__dirname, "/public/");
@@ -18,4 +19,4 @@ app.get("/", (req, res) => {
 });
 
 // tslint:disable-next-line:no-console
-app.listen(3000, () => console.log("Example app listening on port 3000!") );
+app.listen(port, () => console.log(`The server is running at http://localhost:${port}/`) );

@@ -1,16 +1,16 @@
 import * as webpack from "webpack";
-import webpackConfig from "./webpack.config";
+import { clientConfig, serverConfig } from "./webpack.config";
 /**
  * Creates application bundles from the source files.
  */
 function bundle() {
   return new Promise((resolve, reject) => {
-    webpack(webpackConfig).run((err, stats) => {
+    webpack([serverConfig, clientConfig]).run((err, stats) => {
       if (err) {
         return reject(err);
       }
 
-      console.log(stats.toString(webpackConfig[0].stats));
+      console.log(stats.toString(serverConfig.stats));
       return resolve();
     });
   });

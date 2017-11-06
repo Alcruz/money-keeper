@@ -58,9 +58,12 @@ const serverConfig: webpack.Configuration = {
 };
 
 const clientConfig: webpack.Configuration = {
-  entry: "./src/public/App.tsx",
+  entry: [
+    "./src/public/index.tsx",
+  ],
   output: {
     filename: "client.js",
+    publicPath: "/",
     path: path.resolve(__dirname, "../build/public"),
   },
 
@@ -81,12 +84,12 @@ const clientConfig: webpack.Configuration = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: {
+        use: [{
           loader: "ts-loader",
           options: {
             configFile: path.resolve(__dirname, "..", "src/public/tsconfig.json"),
           },
-        },
+        }],
         exclude: [ /node_modules/ ],
       },
     ],
@@ -101,4 +104,4 @@ const clientConfig: webpack.Configuration = {
   },
 };
 
-export default [serverConfig, clientConfig];
+export { serverConfig, clientConfig };
