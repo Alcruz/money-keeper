@@ -21,7 +21,8 @@ async function start() {
                 entry: [
                     "react-hot-loader/patch",
                     "webpack-hot-middleware/client",
-                    ...(clientConfig.entry as string[]) ],
+                    ...(clientConfig.entry as string[]) 
+                ],
                 module: {
                     rules: [
                         {
@@ -39,7 +40,8 @@ async function start() {
                             ],
                             exclude: [ /node_modules/ ],
                         },
-                    ],
+                        ...(clientConfig.module as webpack.NewModule).rules.slice(1)
+                    ]
                 },
                 plugins: [],
             },

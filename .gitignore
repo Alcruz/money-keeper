@@ -59,3 +59,4 @@ typings/
 
 # project ignores
 /build/
+src/public/**/*.scss.d.ts

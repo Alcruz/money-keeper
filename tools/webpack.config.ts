@@ -41,14 +41,14 @@ const serverConfig: webpack.Configuration = {
   module: {
     rules: [
       {
-        test: /\.pug?$/,
-        use: "pug-loader",
-        exclude: /node_modules/,
-      },
-      {
         test: /\.ts$/,
         use: "ts-loader?configFile=../src/tsconfig.json",
         exclude: [ /node_modules/, /public/ ],
+      },
+      {
+        test: /\.pug?$/,
+        use: "pug-loader",
+        exclude: /node_modules/,
       },
     ],
   },
@@ -91,6 +91,20 @@ const clientConfig: webpack.Configuration = {
           },
         }],
         exclude: [ /node_modules/ ],
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          { loader: "style-loader" }, 
+          { loader: "typings-for-css-modules-loader",
+            options: {
+              modules: true,
+              namedExport: true,
+              camelCase: true,
+            } 
+          }, 
+          { loader: "sass-loader", }
+        ]
       },
     ],
   },
