@@ -95,23 +95,34 @@ const clientConfig: webpack.Configuration = {
       {
         test: /\.scss$/,
         use: [
-          { loader: "style-loader" }, 
+          { loader: "style-loader" },
           { loader: "typings-for-css-modules-loader",
             options: {
               modules: true,
+              importLoaders: 1,
               namedExport: true,
               camelCase: true,
-            } 
-          }, 
-          { loader: "sass-loader", }
-        ]
+              sourceMap: true,
+              localIdentName: DEBUG ? "[name]_[local]" : "[hash:base64:5]",
+            },
+          },
+          { loader: "sass-loader",
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
       },
     ],
   },
   resolve: {
     extensions: [ ".tsx", ".ts", ".js" ],
   },
-
+  plugins: [
+    new webpack.WatchIgnorePlugin([
+      /scss\.d\.ts$/,
+    ]),
+  ],
   externals: {
     "react": "React",
     "react-dom": "ReactDOM",

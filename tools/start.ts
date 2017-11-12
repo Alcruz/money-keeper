@@ -21,8 +21,9 @@ async function start() {
                 entry: [
                     "react-hot-loader/patch",
                     "webpack-hot-middleware/client",
-                    ...(clientConfig.entry as string[]) 
+                    ...(clientConfig.entry as string[]),
                 ],
+                devtool: "inline-source-map",
                 module: {
                     rules: [
                         {
@@ -40,15 +41,15 @@ async function start() {
                             ],
                             exclude: [ /node_modules/ ],
                         },
-                        ...(clientConfig.module as webpack.NewModule).rules.slice(1)
-                    ]
+                        ...(clientConfig.module as webpack.NewModule).rules.slice(1),
+                    ],
                 },
-                plugins: [],
             },
         );
 
         devClientConf.plugins.push(new webpack.HotModuleReplacementPlugin());
         devClientConf.plugins.push(new webpack.NoEmitOnErrorsPlugin());
+        devClientConf.plugins.push(new webpack.NamedModulesPlugin());
 
         const bundler = webpack([devClientConf, serverConfig]) as any;
         const wpMiddleware = webpackDevMiddleware(bundler, {
